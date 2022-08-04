@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { ethers } from 'ethers';
 import Counter from './artifacts/contracts/Lock.sol/Lock.json';
+import { decrementCounter, incrementCounter } from "../contracts/Lock.sol"
 import "./App.css"; 
 
 const counterAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
@@ -21,12 +22,6 @@ export default function SimpleCounter() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const contract = new ethers.Contract(counterAddress, Counter.abi, provider)
-      try {
-        const data = await contract.counter()
-        console.log('data: ', data)
-      } catch (err) {
-        console.log("Error: ", err)
-      }
     }
   }
   
@@ -47,12 +42,12 @@ export default function SimpleCounter() {
 
     //increase counter
     const increase = () => {
-      setCounter(count => count + 1);
+      incrementCounter(count => count + 1);
     };
   
     //decrease counter
     const decrease = () => {
-      setCounter(count => count - 1);
+      decrementCounter(count => count - 1);
     };
   
     //reset counter 

@@ -4,10 +4,10 @@ pragma solidity ^0.8.4;
 contract Lock {
     int private count = 0;
 
-    function incrementCounter() external {
+    function incrementCounter() public {
         count += 1;
     }
-    function decrementCounter() external {
+    function decrementCounter() public {
         count -= 1;
     }
 
